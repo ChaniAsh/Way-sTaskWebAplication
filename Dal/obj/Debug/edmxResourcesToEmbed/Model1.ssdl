@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankChaniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers&amp;Counts">
+    <Key>
+      <PropertyRef Name="countNumber" />
+    </Key>
+    <Property Name="id" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="25" />
+    <Property Name="password" Type="nchar" MaxLength="4" />
+    <Property Name="countNumber" Type="int" Nullable="false" />
+    <Property Name="balance" Type="int" />
+    <Property Name="negativeBalance" Type="int" />
+  </EntityType>
+  <EntityType Name="Managers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="nchar" MaxLength="25" />
+    <Property Name="id" Type="nchar" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrafficDetails">
+    <Key>
+      <PropertyRef Name="trafficId" />
+    </Key>
+    <Property Name="CountNumber" Type="int" />
+    <Property Name="Count" Type="int" />
+    <Property Name="description" Type="nchar" MaxLength="10" />
+    <Property Name="date" Type="date" />
+    <Property Name="trafficId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_TrafficDetails_Customers&amp;Counts">
+    <End Role="Customers&amp;Counts" Type="Self.Customers&amp;Counts" Multiplicity="0..1" />
+    <End Role="TrafficDetails" Type="Self.TrafficDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers&amp;Counts">
+        <PropertyRef Name="countNumber" />
+      </Principal>
+      <Dependent Role="TrafficDetails">
+        <PropertyRef Name="CountNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankChaniModelStoreContainer">
+    <EntitySet Name="Customers&amp;Counts" EntityType="Self.Customers&amp;Counts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TrafficDetails" EntityType="Self.TrafficDetails" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TrafficDetails_Customers&amp;Counts" Association="Self.FK_TrafficDetails_Customers&amp;Counts">
+      <End Role="Customers&amp;Counts" EntitySet="Customers&amp;Counts" />
+      <End Role="TrafficDetails" EntitySet="TrafficDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankChaniModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customers_Counts">
+    <Key>
+      <PropertyRef Name="countNumber" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+    <Property Name="countNumber" Type="Int32" Nullable="false" />
+    <Property Name="balance" Type="Int32" />
+    <Property Name="negativeBalance" Type="Int32" />
+    <NavigationProperty Name="TrafficDetails" Relationship="Self.FK_TrafficDetails_Customers_Counts" FromRole="Customers_Counts" ToRole="TrafficDetails" />
+  </EntityType>
+  <EntityType Name="Managers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="id" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TrafficDetails">
+    <Key>
+      <PropertyRef Name="trafficId" />
+    </Key>
+    <Property Name="CountNumber" Type="Int32" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="date" Type="DateTime" Precision="0" />
+    <Property Name="trafficId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Customers_Counts" Relationship="Self.FK_TrafficDetails_Customers_Counts" FromRole="TrafficDetails" ToRole="Customers_Counts" />
+  </EntityType>
+  <Association Name="FK_TrafficDetails_Customers_Counts">
+    <End Role="Customers_Counts" Type="Self.Customers_Counts" Multiplicity="0..1" />
+    <End Role="TrafficDetails" Type="Self.TrafficDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers_Counts">
+        <PropertyRef Name="countNumber" />
+      </Principal>
+      <Dependent Role="TrafficDetails">
+        <PropertyRef Name="CountNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankChaniEntities3" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers_Counts" EntityType="Self.Customers_Counts" />
+    <EntitySet Name="Managers" EntityType="Self.Managers" />
+    <EntitySet Name="TrafficDetails" EntityType="Self.TrafficDetails" />
+    <AssociationSet Name="FK_TrafficDetails_Customers_Counts" Association="Self.FK_TrafficDetails_Customers_Counts">
+      <End Role="Customers_Counts" EntitySet="Customers_Counts" />
+      <End Role="TrafficDetails" EntitySet="TrafficDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

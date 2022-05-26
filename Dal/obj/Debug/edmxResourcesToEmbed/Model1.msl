@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankChaniModelStoreContainer" CdmEntityContainer="BankChaniEntities3">
+    <EntitySetMapping Name="Customers_Counts">
+      <EntityTypeMapping TypeName="BankChaniModel.Customers_Counts">
+        <MappingFragment StoreEntitySet="Customers&amp;Counts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="countNumber" ColumnName="countNumber" />
+          <ScalarProperty Name="balance" ColumnName="balance" />
+          <ScalarProperty Name="negativeBalance" ColumnName="negativeBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Managers">
+      <EntityTypeMapping TypeName="BankChaniModel.Managers">
+        <MappingFragment StoreEntitySet="Managers">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrafficDetails">
+      <EntityTypeMapping TypeName="BankChaniModel.TrafficDetails">
+        <MappingFragment StoreEntitySet="TrafficDetails">
+          <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="trafficId" ColumnName="trafficId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
